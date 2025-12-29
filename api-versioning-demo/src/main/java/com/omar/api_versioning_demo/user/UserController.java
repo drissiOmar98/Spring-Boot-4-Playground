@@ -79,6 +79,24 @@ public class UserController {
                 .collect(Collectors.toList());
     }
 
+    // USING MEDIA TYPE (Content Negotiation) =======================================
 
+    @GetMapping(value = "/users/media", version = "1.0", produces = "application/json")
+    public List<UserDTOv1> getUsersMediaV1() {
+        log.info("Find All Users using media type versioning: {}", "v1");
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toV1)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/users/media", version = "2.0", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UserDTOv2> getUsersMediaV2() {
+        log.info("Find All Users using media type versioning: {}", "v2");
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toV2)
+                .collect(Collectors.toList());
+    }
 
 }

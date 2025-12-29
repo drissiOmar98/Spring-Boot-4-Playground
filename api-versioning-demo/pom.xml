@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.omar</groupId>
-	<artifactId>sb4-api-versioning-demo</artifactId>
+	<artifactId>api-versioning-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sb4-api-versioning-demo</name>
+	<name>api-versioning-demo</name>
 	<description>Spring Boot 4 project demonstrating REST API versioning strategies and best practices.</description>
 	<url/>
 	<licenses>

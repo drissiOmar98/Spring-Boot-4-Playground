@@ -7,11 +7,13 @@
         <option value="$PROJECT_DIR$/../Spring AI/Spring AI Integration/docker-model-runner/pom.xml" />
         <option value="$PROJECT_DIR$/null-safety-jspecify-nullaway/pom.xml" />
         <option value="$PROJECT_DIR$/sb4-api-versioning-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/api-versioning-demo/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/../Spring AI/Spring AI Integration/docker-model-runner/pom.xml" />
+        <option value="$PROJECT_DIR$/sb4-api-versioning-demo/pom.xml" />
       </set>
     </option>
   </component>

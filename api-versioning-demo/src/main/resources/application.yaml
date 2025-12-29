@@ -1,3 +1,35 @@
 spring:
   application:
     name: api-versioning-demo
+
+# spring:
+#   mvc:
+#     apiversion:
+#       # Enable API versioning using URL path segments
+#       # Example: /api/v1/users
+#       use:
+#         path-segment: true
+#
+#       # List of supported API versions
+#       # Requests with unsupported versions will be rejected
+#       supported: 1.0,2.0
+#
+#       # Default API version when none is provided
+#       default: 1.0
+#
+#       # Enable API versioning via HTTP header
+#       # Example: X-API-Version: 1.0
+#       use:
+#         header: X-API-Version
+#
+#       # Enable API versioning via query parameter
+#       # Example: /api/users?version=1.0
+#       use:
+#         query-parameter: version
+#
+#       # Enable API versioning via media type parameter
+#       # Example: application/json;version=1.0
+#       use:
+#         media-type-parameter:
+#           application/json: version
+

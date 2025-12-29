@@ -59,6 +59,26 @@ public class UserController {
     }
 
 
+    // USING REQUEST PARAMETER (Query Parameter) ===================================
+
+    @GetMapping(value = "/users/list", params = "version=1.0")
+    public List<UserDTOv1> listUsersV1(@RequestParam String version) {
+        log.info("Find All Users using request header: {}", "v1");
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toV1)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/users/list", params = "version=v2")
+    public List<UserDTOv2> listUsersV2(@RequestParam String version) {
+        log.info("Find All Users using request header: {}", "v2");
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toV2)
+                .collect(Collectors.toList());
+    }
+
 
 
 }

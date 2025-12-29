@@ -38,6 +38,27 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    // USING REQUEST HEADER ======================================================
+
+    @GetMapping(value = "/users", version = "1.0")
+    public List<UserDTOv1> getUsersV1() {
+        log.info("Find All Users using request header: {}", "v1");
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toV1)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/users", version = "2.0")
+    public List<UserDTOv2> getUsersV2() {
+        log.info("Find All Users using request header: {}", "v2");
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toV2)
+                .collect(Collectors.toList());
+    }
+
+
 
 
 }

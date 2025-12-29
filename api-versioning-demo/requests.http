@@ -1,0 +1,61 @@
+### =========================================================
+### PATH SEGMENT VERSIONING
+### =========================================================
+
+### v1 using /api/v1/users
+GET http://localhost:8080/api/v1/users
+Accept: application/json
+
+###
+
+### v2 using /api/v2/users
+GET http://localhost:8080/api/v2/users
+Accept: application/json
+
+
+### =========================================================
+### REQUEST HEADER VERSIONING
+### (based on your ApiVersionConfigurer setup)
+### =========================================================
+
+### v1 using header
+GET http://localhost:8080/api/users
+X-API-Version: 1.0
+Accept: application/json
+
+###
+
+### v2 using header
+GET http://localhost:8080/api/users
+X-API-Version: 2.0
+Accept: application/json
+
+
+### =========================================================
+### QUERY PARAMETER VERSIONING
+### =========================================================
+
+### v1 using query parameter
+GET http://localhost:8080/api/users/list?version=1.0
+Accept: application/json
+
+###
+
+### v2 using query parameter (v2 alias handled by ApiVersionParser)
+GET http://localhost:8080/api/users/list?version=v2
+Accept: application/json
+
+
+### =========================================================
+### MEDIA TYPE (CONTENT NEGOTIATION) VERSIONING
+### =========================================================
+
+### v1 using media type
+GET http://localhost:8080/api/users/media
+Accept: application/json;version=1.0
+
+###
+
+### v2 using media type
+GET http://localhost:8080/api/users/media
+Accept: application/json;version=2.0

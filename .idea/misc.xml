@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/null-safety-jspecify-nullaway/pom.xml" />
         <option value="$PROJECT_DIR$/sb4-api-versioning-demo/pom.xml" />
         <option value="$PROJECT_DIR$/api-versioning-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/api-versioning-path-segment/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

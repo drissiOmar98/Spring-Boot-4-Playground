@@ -1,0 +1,116 @@
+### ============================================
+### Todo API - Spring Boot 4 HTTP Interfaces Demo
+### Base URL
+### ============================================
+
+@baseUrl = http://localhost:8080/api/todos
+
+
+### ============================================
+### GET all todos
+### ============================================
+GET {{baseUrl}}
+Accept: application/json
+
+
+### ============================================
+### GET todo by ID
+### ============================================
+GET {{baseUrl}}/1
+Accept: application/json
+
+
+### ============================================
+### CREATE a new todo
+### ============================================
+POST {{baseUrl}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Learn Spring Boot 4 HTTP Interfaces",
+  "completed": false,
+  "userId": 1
+}
+
+
+### ============================================
+### UPDATE an existing todo
+### ============================================
+PUT {{baseUrl}}/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 1,
+  "title": "Learn Spring Boot 4 HTTP Interfaces (Updated)",
+  "completed": true,
+  "userId": 1
+}
+
+
+### ============================================
+### DELETE a todo
+### ============================================
+DELETE {{baseUrl}}/1
+Accept: application/json
+
+
+
+
+### ============================================
+### Posts API - Spring Boot 4 HTTP Interfaces Demo
+### Base URL
+### ============================================
+
+@postsBaseUrl = http://localhost:8080/api/posts
+
+
+### ============================================
+### GET all posts
+### ============================================
+GET {{postsBaseUrl}}
+Accept: application/json
+
+
+### ============================================
+### GET post by ID
+### ============================================
+GET {{postsBaseUrl}}/1
+Accept: application/json
+
+
+### ============================================
+### CREATE a new post
+### ============================================
+POST {{postsBaseUrl}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Spring Boot 4 HTTP Interfaces",
+  "body": "Declarative REST clients are now easier than ever with HTTP Interfaces.",
+  "userId": 1
+}
+
+
+### ============================================
+### UPDATE an existing post
+### ============================================
+PUT {{postsBaseUrl}}/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 1,
+  "title": "Spring Boot 4 HTTP Interfaces (Updated)",
+  "body": "Updated content demonstrating PUT with HTTP Interfaces.",
+  "userId": 1
+}
+
+
+### ============================================
+### DELETE a post
+### ============================================
+DELETE {{postsBaseUrl}}/1
+Accept: application/json

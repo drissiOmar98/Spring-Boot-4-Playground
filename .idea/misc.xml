@@ -9,6 +9,10 @@
         <option value="$PROJECT_DIR$/sb4-api-versioning-demo/pom.xml" />
         <option value="$PROJECT_DIR$/api-versioning-demo/pom.xml" />
         <option value="$PROJECT_DIR$/api-versioning-path-segment/pom.xml" />
+        <option value="$PROJECT_DIR$/http-interfaces-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/api-versioning-query-param/pom.xml" />
+        <option value="$PROJECT_DIR$/api-versioning-header/pom.xml" />
+        <option value="$PROJECT_DIR$/api-versioning-media-type-param/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

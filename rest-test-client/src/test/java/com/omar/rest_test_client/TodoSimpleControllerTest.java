@@ -67,5 +67,20 @@ class TodoSimpleControllerTest {
                 });
     }
 
+    /**
+     * Using JsonPath: No Type Parameter needed
+     */
+    @Test
+    void findTodoByIJsonPath() {
+        client.get()
+                .uri("/api/todos/simple/1")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()  // No type parameter needed
+                .jsonPath("$.id").isEqualTo(1)
+                .jsonPath("$.userId").isEqualTo(1L)
+                .jsonPath("$.title").isEqualTo("First Todo")
+                .jsonPath("$.completed").isEqualTo(true);
+    }
 
 }

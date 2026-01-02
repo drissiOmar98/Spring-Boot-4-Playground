@@ -50,6 +50,22 @@ class TodoSimpleControllerTest {
                 });
     }
 
+    /*
+     * Using AssertJ Assertions
+     */
+    @Test
+    void findTodoByIdAssertJ() {
+        client.get()
+                .uri("/api/todos/simple/1")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Todo.class)
+                .value(todo -> {
+                    assertThat(todo.id()).isEqualTo(1L);
+                    assertThat(todo.title()).isEqualTo("First Todo");
+                    assertThat(todo.completed()).isTrue();
+                });
+    }
 
 
 }

@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/api-versioning-query-param/pom.xml" />
         <option value="$PROJECT_DIR$/api-versioning-header/pom.xml" />
         <option value="$PROJECT_DIR$/api-versioning-media-type-param/pom.xml" />
+        <option value="$PROJECT_DIR$/rest-test-client/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

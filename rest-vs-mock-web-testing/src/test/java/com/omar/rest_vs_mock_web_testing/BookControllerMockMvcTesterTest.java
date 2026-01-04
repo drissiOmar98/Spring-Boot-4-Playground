@@ -201,7 +201,28 @@ class BookControllerMockMvcTesterTest {
         assertThat(result).bodyJson().extractingPath("$[1].authors[0]").isEqualTo("Joshua Bloch");
     }
 
+    /**
+     * Tests that MockMvcTester correctly handles books with multiple authors.
+     *
+     * <p>Verifies that search by author returns all matching books and
+     * correctly exposes multiple authors in the JSON response.</p>
+     */
+    @Test
+    @DisplayName("GET /api/books/author/{author} - should find books with multiple authors")
+    void shouldFindBooksWithMultipleAuthors() {
+        var book = new Book(1L, "Fundamentals of Software Engineering",
+                List.of("Nathaniel Schutta", "Dan Vega"), "978-1098143237", 2025);
+        when(bookRepository.findByAuthorContainingIgnoreCase("vega")).thenReturn(List.of(book));
 
+        var result = mockMvcTester.get().uri("/api/books/author/vega");
+
+        assertThat(result).hasStatusOk();
+        // Assert JSON body structure and content
+        assertThat(result).bodyJson().extractingPath("$[0].title").isEqualTo("Fundamentals of Software Engineering");
+        assertThat(result).bodyJson().extractingPath("$[0].authors").asArray().hasSize(2);
+        assertThat(result).bodyJson().extractingPath("$[0].authors[0]").isEqualTo("Nathaniel Schutta");
+        assertThat(result).bodyJson().extractingPath("$[0].authors[1]").isEqualTo("Dan Vega");
+    }
 }
 
 

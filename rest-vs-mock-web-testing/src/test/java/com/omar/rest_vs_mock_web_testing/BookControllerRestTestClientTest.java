@@ -229,5 +229,29 @@ class BookControllerRestTestClientTest {
     }
 
 
+    /**
+     * Tests that RestTestClient can handle multiple authors correctly
+     * when searching by author.
+     *
+     * <p>Verifies that JSON response contains all authors and correct
+     * book information.</p>
+     */
+    @Test
+    @DisplayName("GET /api/books/author/{author} - should find books with multiple authors")
+    void shouldFindBooksWithMultipleAuthors() {
+        var book = new Book(1L, "Fundamentals of Software Engineering",
+                List.of("Nathaniel Schutta", "Dan Vega"), "978-1098143237", 2025);
+        when(bookRepository.findByAuthorContainingIgnoreCase("vega")).thenReturn(List.of(book));
+
+        client.get().uri("/api/books/author/vega")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$[0].title").isEqualTo("Fundamentals of Software Engineering")
+                .jsonPath("$[0].authors.length()").isEqualTo(2)
+                .jsonPath("$[0].authors[0]").isEqualTo("Nathaniel Schutta")
+                .jsonPath("$[0].authors[1]").isEqualTo("Dan Vega");
+    }
+
 
 }

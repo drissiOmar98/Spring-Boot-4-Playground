@@ -175,5 +175,33 @@ class BookControllerRestTestClientTest {
                 .expectStatus().isNotFound();
     }
 
+    // =========================================================================
+    // UNIQUE RESTTESTCLIENT CAPABILITIES
+    // =========================================================================
+
+
+    /**
+     * Demonstrates that RestTestClient can deserialize a single response
+     * into a typed domain object.
+     *
+     * <p>This is useful when you want a strongly-typed object directly from
+     * the response without manually mapping JSON.</p>
+     */
+    @Test
+    @DisplayName("RestTestClient can deserialize response to typed object")
+    void canDeserializeToTypedObject() {
+        var book = new Book(1L, "Fundamentals of Software Engineering", List.of("Nathaniel Schutta", "Dan Vega"), "978-1098143237", 2025);
+        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+
+        client.get().uri("/api/books/1")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Book.class)
+                .value(b -> {
+                    assert b.title().equals("Fundamentals of Software Engineering");
+                    assert b.authors().contains("Dan Vega");
+                });
+    }
+
 
 }

@@ -149,6 +149,35 @@ class BookControllerMockMvcTesterTest {
                 .hasStatus(HttpStatus.NOT_FOUND);
     }
 
+    // =========================================================================
+    // UNIQUE MOCKMVCTESTER CAPABILITIES
+    // =========================================================================
+
+    /**
+     * Verifies that MockMvcTester can identify which controller handler method
+     * was invoked for a given request.
+     *
+     * <p>This is useful for tests where you want to assert server-side routing
+     * behavior or inspect the invoked handler directly.</p>
+     */
+    @Test
+    @DisplayName("MockMvcTester can verify which handler method was invoked")
+    void canVerifyHandlerMethod() {
+        when(bookRepository.findAll()).thenReturn(List.of());
+
+        var result = mockMvcTester.get().uri("/api/books");
+
+        // Assert HTTP status and verify invoked handler method details
+        assertThat(result)
+                .hasStatusOk()
+                .apply(mvcResult -> assertThat((org.springframework.web.method.HandlerMethod) mvcResult.getHandler())
+                        .isNotNull()
+                        .satisfies(handler -> {
+                            assertThat(handler.getMethod().getName()).isEqualTo("findAll");
+                            assertThat(handler.getBeanType()).isEqualTo(BookController.class);
+                        }));
+    }
+
 
 }
 

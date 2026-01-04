@@ -178,6 +178,29 @@ class BookControllerMockMvcTesterTest {
                         }));
     }
 
+    /**
+     * Demonstrates fluent JSON path assertions with MockMvcTester.
+     *
+     * <p>Shows how AssertJ-style chaining can be used to inspect JSON responses
+     * without manually parsing or mapping the payload.</p>
+     */
+    @Test
+    @DisplayName("MockMvcTester provides fluent JSON path assertions with chaining")
+    void fluentJsonPathAssertions() {
+        var books = List.of(
+                new Book(1L, "Fundamentals of Software Engineering", List.of("Nathaniel Schutta", "Dan Vega"), "978-1098143237", 2025),
+                new Book(2L, "Effective Java", "Joshua Bloch", "978-0134685991", 2018)
+        );
+        when(bookRepository.findAll()).thenReturn(books);
+
+        var result = mockMvcTester.get().uri("/api/books");
+
+        assertThat(result).hasStatusOk();
+        // Assert JSON body using path extraction
+        assertThat(result).bodyJson().extractingPath("$[0].title").isEqualTo("Fundamentals of Software Engineering");
+        assertThat(result).bodyJson().extractingPath("$[1].authors[0]").isEqualTo("Joshua Bloch");
+    }
+
 
 }
 

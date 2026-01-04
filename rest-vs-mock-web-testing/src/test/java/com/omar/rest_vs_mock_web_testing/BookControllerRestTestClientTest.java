@@ -203,5 +203,31 @@ class BookControllerRestTestClientTest {
                 });
     }
 
+    /**
+     * Demonstrates that RestTestClient can deserialize a response containing
+     * a list of objects into a typed List.
+     *
+     * <p>This allows for strongly-typed collection assertions without manual parsing.</p>
+     */
+    @Test
+    @DisplayName("RestTestClient can deserialize response to typed list")
+    void canDeserializeToTypedList() {
+        var books = List.of(
+                new Book(1L, "Fundamentals of Software Engineering", List.of("Nathaniel Schutta", "Dan Vega"), "978-1098143237", 2025),
+                new Book(2L, "Effective Java", "Joshua Bloch", "978-0134685991", 2018)
+        );
+        when(bookRepository.findAll()).thenReturn(books);
+
+        client.get().uri("/api/books")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<List<Book>>() {})
+                .value( b -> {
+                    assert b.get(0).title().equals("Fundamentals of Software Engineering");
+                    assert b.get(1).authors().contains("Joshua Bloch");
+                });
+    }
+
+
 
 }

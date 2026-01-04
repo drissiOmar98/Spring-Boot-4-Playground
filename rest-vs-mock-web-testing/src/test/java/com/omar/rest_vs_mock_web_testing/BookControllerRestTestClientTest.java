@@ -253,5 +253,26 @@ class BookControllerRestTestClientTest {
                 .jsonPath("$[0].authors[1]").isEqualTo("Dan Vega");
     }
 
+    /**
+     * Demonstrates that RestTestClient can be wrapped with
+     * RestTestClientResponse to use AssertJ-style fluent assertions.
+     *
+     * <p>This enables consistency with MockMvcTester-style assertion chains
+     * in your tests.</p>
+     */
+    @Test
+    @DisplayName("RestTestClient supports AssertJ-style assertions via RestTestClientResponse")
+    void canUseAssertJStyleAssertions() {
+        var book = new Book(1L, "Fundamentals of Software Engineering", List.of("Nathaniel Schutta", "Dan Vega"), "978-1098143237", 2025);
+        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
 
+        var spec = client.get().uri("/api/books/1").exchange();
+        var response = RestTestClientResponse.from(spec);
+
+        assertThat(response)
+                .hasStatusOk()
+                .bodyJson()
+                .extractingPath("$.title")
+                .isEqualTo("Fundamentals of Software Engineering");
+    }
 }

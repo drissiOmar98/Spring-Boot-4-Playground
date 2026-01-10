@@ -10,6 +10,7 @@
         <module name="api-versioning-path-segment" />
         <module name="rest-vs-mock-web-testing" />
         <module name="api-versioning-query-param" />
+        <module name="spring-data-aot" />
         <module name="api-versioning-media-type-param" />
         <module name="http-interfaces-demo" />
         <module name="api-versioning-header" />
@@ -63,6 +64,7 @@
       <module name="rest-test-client" options="-parameters" />
       <module name="rest-vs-mock-web-testing" options="-parameters" />
       <module name="sb4-api-versioning-demo" options="-parameters" />
+      <module name="spring-data-aot" options="-parameters" />
     </option>
   </component>
 </project>

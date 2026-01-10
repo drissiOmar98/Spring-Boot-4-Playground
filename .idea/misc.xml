@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/api-versioning-media-type-param/pom.xml" />
         <option value="$PROJECT_DIR$/rest-test-client/pom.xml" />
         <option value="$PROJECT_DIR$/rest-vs-mock-web-testing/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-data-aot/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

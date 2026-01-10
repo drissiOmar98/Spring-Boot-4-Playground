@@ -1,3 +1,15 @@
 spring:
   application:
     name: spring-data-aot
+
+  # Database configuration - using H2 in-memory for simplicity
+  datasource:
+    url: jdbc:h2:mem:coffee;DATABASE_TO_UPPER=false;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  # Spring Data JDBC configuration
+  sql:
+    init:
+      mode: always

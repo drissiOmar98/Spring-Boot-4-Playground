@@ -64,5 +64,31 @@ class AotRepositoryValidationTest {
 
     private static final JsonMapper mapper = JsonMapper.builder().build();
 
+    /**
+     * Validates that all custom methods declared in {@link CoffeeRepository}
+     * are present in the generated Spring Data AOT metadata.
+     */
+    @Test
+    void coffeeRepositoryMethodsAreAotProcessed() throws IOException {
+        validateRepository(CoffeeRepository.class, "com/omar/spring_data_aot/coffee/CoffeeRepository.json");
+    }
+
+    /**
+     * Validates Spring Data AOT processing for {@link OrderRepository}.
+     */
+    @Test
+    void orderRepositoryMethodsAreAotProcessed() throws IOException {
+        validateRepository(OrderRepository.class, "com/omar/spring_data_aot/order/OrderRepository.json");
+    }
+
+    /**
+     * Validates Spring Data AOT processing for {@link OrderItemRepository}.
+     */
+    @Test
+    void orderItemRepositoryMethodsAreAotProcessed() throws IOException {
+        validateRepository(OrderItemRepository.class, "com/omar/spring_data_aot/order/OrderItemRepository.json");
+    }
+
+
 
 }

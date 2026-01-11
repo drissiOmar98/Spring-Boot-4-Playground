@@ -173,6 +173,24 @@ class AotRepositoryValidationTest {
     }
 
 
+    /**
+     * Extracts all <strong>custom</strong> method signatures declared in a repository.
+     *
+     * <p>
+     * CRUD methods inherited from {@link CrudRepository} are ignored, since they
+     * are always handled by Spring Data automatically.
+     * </p>
+     *
+     * @param repositoryClass the repository interface
+     * @return set of custom method signatures
+     */
+    private Set<String> getCustomMethodSignatures(Class<?> repositoryClass) {
+        return Arrays.stream(repositoryClass.getDeclaredMethods())
+                .filter(method -> !isInheritedCrudMethod(method))
+                .map(this::buildSignatureKey)
+                .collect(Collectors.toSet());
+    }
+
 
 
 
@@ -230,5 +248,23 @@ class AotRepositoryValidationTest {
         return lastDot == -1 ? fullyQualifiedName : fullyQualifiedName.substring(lastDot + 1);
     }
 
-
+    /**
+     * Determines whether a method is inherited from {@link CrudRepository}.
+     *
+     * <p>
+     * These methods are excluded from validation because they are always
+     * supported by Spring Data and not part of custom query derivation.
+     * </p>
+     *
+     * @param method repository method
+     * @return {@code true} if inherited from CrudRepository
+     */
+    private boolean isInheritedCrudMethod(Method method) {
+        try {
+            CrudRepository.class.getMethod(method.getName(), method.getParameterTypes());
+            return true;
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
+    }
 }

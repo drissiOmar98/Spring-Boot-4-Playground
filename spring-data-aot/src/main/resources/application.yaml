@@ -13,3 +13,14 @@ spring:
   sql:
     init:
       mode: always
+
+# Logging for AOT repository generation (useful to see what's being generated)
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          repository:
+            aot:
+              generate:
+                RepositoryContributor: trace

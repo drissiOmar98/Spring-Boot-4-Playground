@@ -144,5 +144,91 @@ class AotRepositoryValidationTest {
     }
 
 
+    /**
+     * Extracts method signatures from the AOT metadata JSON.
+     *
+     * <p>
+     * Spring Data AOT stores both:
+     * </p>
+     * <ul>
+     *   <li>Method name</li>
+     *   <li>Full JVM method signature</li>
+     * </ul>
+     *
+     * <p>
+     * These are normalized into a comparable {@code methodName(param1,param2)} form.
+     * </p>
+     *
+     * @param metadata parsed AOT metadata
+     * @return set of processed method signatures
+     */
+    private Set<String> extractMethodSignatures(JsonNode metadata) {
+        return StreamSupport.stream(metadata.get("methods").spliterator(), false)
+                .map(method -> {
+                    String name = method.get("name").asText();
+                    String signature = method.get("signature").asText();
+                    return buildSignatureKey(name, signature);
+                })
+                .collect(Collectors.toSet());
+    }
+
+
+
+
+
+    /**
+     * Builds a normalized signature key from AOT metadata values.
+     *
+     * <p>
+     * The full signature provided by Spring Data AOT looks like:
+     * </p>
+     * <pre>
+     * public abstract ReturnType ClassName.methodName(ParamType1,ParamType2)
+     * </pre>
+     *
+     * <p>
+     * This method extracts parameter types and converts them to simple class names
+     * to match reflection-based signatures.
+     * </p>
+     *
+     * @param methodName   repository method name
+     * @param fullSignature JVM-level method signature
+     * @return normalized signature string
+     */
+    private String buildSignatureKey(String methodName, String fullSignature) {
+        // Parse parameter types from full signature
+        // Format: "public abstract ReturnType ClassName.methodName(ParamType1,ParamType2)"
+        int paramsStart = fullSignature.indexOf('(');
+        if (paramsStart == -1) {
+            return "%s()".formatted(methodName);
+        }
+
+        int paramsEnd = fullSignature.indexOf(')', paramsStart);
+        String params = fullSignature.substring(paramsStart + 1, paramsEnd);
+
+        if (params.isEmpty()) {
+            return "%s()".formatted(methodName);
+        }
+
+        // Extract simple class names from fully qualified parameter types
+        String simplifiedParams = Arrays.stream(params.split(","))
+                .map(String::trim)
+                .map(this::extractSimpleClassName)
+                .collect(Collectors.joining(","));
+
+        return "%s(%s)".formatted(methodName, simplifiedParams);
+    }
+
+    /**
+     * Extracts the simple class name from a fully qualified name.
+     *
+     * @param fullyQualifiedName e.g. {@code java.time.LocalDate}
+     * @return simple class name e.g. {@code LocalDate}
+     */
+    private String extractSimpleClassName(String fullyQualifiedName) {
+        int lastDot = fullyQualifiedName.lastIndexOf('.');
+        return lastDot == -1 ? fullyQualifiedName : fullyQualifiedName.substring(lastDot + 1);
+    }
+
 
 }

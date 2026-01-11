@@ -90,5 +90,39 @@ class AotRepositoryValidationTest {
     }
 
 
+    /**
+     * Core validation logic shared by all repository tests.
+     *
+     * <p>
+     * This method compares:
+     * </p>
+     * <ol>
+     *   <li>Custom methods declared directly on the repository interface</li>
+     *   <li>Methods listed in the Spring Data AOT-generated metadata</li>
+     * </ol>
+     *
+     * <p>
+     * The comparison is done using <strong>method signatures</strong>
+     * (method name + parameter types) to correctly handle overloaded methods.
+     * </p>
+     *
+     * @param repositoryClass the Spring Data repository interface
+     * @param metadataPath    relative path to the generated AOT metadata JSON file
+     *
+     * @throws IOException if the metadata file cannot be read
+     */
+    private void validateRepository(Class<?> repositoryClass, String metadataPath) throws IOException {
+        JsonNode metadata = loadMetadata(metadataPath);
+        Set<String> declaredSignatures = getCustomMethodSignatures(repositoryClass);
+        Set<String> aotProcessedSignatures = extractMethodSignatures(metadata);
+
+        Set<String> skippedSignatures = new HashSet<>(declaredSignatures);
+        skippedSignatures.removeAll(aotProcessedSignatures);
+
+        assertTrue(skippedSignatures.isEmpty(),
+                "AOT skipped methods in %s: %s".formatted(repositoryClass.getSimpleName(), skippedSignatures));
+    }
+
+
 
 }

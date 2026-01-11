@@ -124,5 +124,25 @@ class AotRepositoryValidationTest {
     }
 
 
+    /**
+     * Loads the Spring Data AOT metadata file generated at build time.
+     *
+     * <p>
+     * In Spring Boot 4, repository metadata is generated under
+     * {@code target/classes} as part of AOT processing.
+     * </p>
+     *
+     * @param relativePath classpath-relative location of the metadata file
+     * @return parsed JSON metadata
+     *
+     * @throws IOException if the file cannot be read
+     */
+    private JsonNode loadMetadata(String relativePath) throws IOException {
+        Path path = Paths.get("target/classes", relativePath);
+        assertTrue(Files.exists(path), "AOT metadata not found: " + path);
+        return mapper.readTree(path.toFile());
+    }
+
+
 
 }

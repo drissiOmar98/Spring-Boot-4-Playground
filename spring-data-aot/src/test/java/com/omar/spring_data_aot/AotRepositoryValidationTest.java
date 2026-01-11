@@ -192,7 +192,25 @@ class AotRepositoryValidationTest {
     }
 
 
-
+    /**
+     * Builds a normalized signature key from a Java {@link Method}.
+     *
+     * <p>
+     * Example:
+     * </p>
+     * <pre>
+     * findByStatusAndDate(Status, LocalDate)
+     * </pre>
+     *
+     * @param method repository method
+     * @return normalized signature string
+     */
+    private String buildSignatureKey(Method method) {
+        String paramTypes = Arrays.stream(method.getParameterTypes())
+                .map(Class::getSimpleName)
+                .collect(Collectors.joining(","));
+        return "%s(%s)".formatted(method.getName(), paramTypes);
+    }
 
     /**
      * Builds a normalized signature key from AOT metadata values.

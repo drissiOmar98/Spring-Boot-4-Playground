@@ -1,3 +1,5 @@
 spring:
   application:
     name: dynamic-bean-registration
+app:
+  message-type: SMS

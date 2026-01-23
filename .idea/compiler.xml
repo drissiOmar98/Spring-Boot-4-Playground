@@ -12,6 +12,7 @@
         <module name="dynamic-bean-registration" />
         <module name="api-versioning-query-param" />
         <module name="spring-data-aot" />
+        <module name="opentelemetry-demo" />
         <module name="api-versioning-media-type-param" />
         <module name="http-interfaces-demo" />
         <module name="api-versioning-header" />
@@ -63,6 +64,7 @@
       <module name="dynamic-bean-registration" options="-parameters" />
       <module name="http-interfaces-demo" options="-parameters" />
       <module name="null-safety-jspecify-nullaway" options="-parameters -XDcompilePolicy=simple --should-stop=ifError=FLOW &quot;-Xplugin:ErrorProne -Xep:NullAway:ERROR -XepOpt:NullAway:OnlyNullMarked&quot; -J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED -J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED" />
+      <module name="opentelemetry-demo" options="-parameters" />
       <module name="rest-test-client" options="-parameters" />
       <module name="rest-vs-mock-web-testing" options="-parameters" />
       <module name="sb4-api-versioning-demo" options="-parameters" />

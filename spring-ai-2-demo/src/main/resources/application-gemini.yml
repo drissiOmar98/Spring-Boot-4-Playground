@@ -1,11 +1,17 @@
 spring:
   ai:
-    openai:
-      api-key: ${GOOGLE_GENAI_API_KEY}
+    # NEW in 2.0: Google GenAI (Gemini) integration
+    google:
+      genai:
+        api-key: ${GOOGLE_GENAI_API_KEY}
+        chat:
+          options:
+            model: gemini-2.0-flash
 
-      chat:
-        options:
-          model: gemini-2.0-flash
+
+  docker:
+    compose:
+      enabled: false
 
 logging:
   level:

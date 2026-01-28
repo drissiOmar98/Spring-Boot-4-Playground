@@ -1,3 +1,25 @@
 spring:
   application:
     name: spring-ai-2-demo
+
+  ai:
+    # NEW in 2.0: Official OpenAI Java SDK
+    openai-sdk:
+      api-key: ${OPENAI_API_KEY}
+
+      chat:
+        options:
+          model: gpt-4o
+
+      # Multi-provider support (same code, different backend):
+      # Azure OpenAI:
+      #   base-url: https://<deployment>.openai.azure.com
+      #   microsoft-deployment-name: <deployment-name>
+      # GitHub Models:
+      #   base-url: https://models.inference.ai.azure.com
+      #   api-key: github_pat_XXX
+
+
+logging:
+  level:
+    org.springframework.ai: INFO

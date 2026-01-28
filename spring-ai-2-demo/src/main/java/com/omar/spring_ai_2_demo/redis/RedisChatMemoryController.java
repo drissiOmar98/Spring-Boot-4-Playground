@@ -146,6 +146,33 @@ public class RedisChatMemoryController {
         );
     }
 
+    /**
+     * Lists all conversation IDs currently stored in Redis.
+     *
+     * <p>This endpoint allows clients to retrieve a summary of all active or past conversations
+     * maintained in Redis. Each conversation is identified by a unique {@code conversationId}.</p>
+     *
+     * <p>Internally, the {@link ChatMemoryRepository} is queried to fetch all conversation IDs.</p>
+     *
+     * <p><b>HTTP Method:</b> GET</p>
+     * <p><b>Endpoint:</b> /api/redis/conversations</p>
+     *
+     * @return a {@link Map} containing:
+     * <ul>
+     *     <li>{@code count} - the total number of conversations stored</li>
+     *     <li>{@code conversationIds} - a list of all conversation IDs</li>
+     * </ul>
+     */
+    @GetMapping("/conversations")
+    public Map<String, Object> listConversations() {
+        var conversationIds = chatMemoryRepository.findConversationIds();
+
+        return Map.of(
+                "count", conversationIds.size(),
+                "conversationIds", conversationIds
+        );
+    }
+
 
 
     public record ChatRequest(String message) {}

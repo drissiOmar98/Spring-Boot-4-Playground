@@ -173,7 +173,34 @@ public class RedisChatMemoryController {
         );
     }
 
+    /**
+     * Deletes a conversation and all its messages from Redis.
+     *
+     * <p>This endpoint allows clients to remove a specific conversation identified
+     * by {@code conversationId}. All messages associated with this conversation
+     * are deleted permanently from Redis.</p>
+     *
+     * <p>Internally, the {@link ChatMemoryRepository} is used to remove the conversation.</p>
+     *
+     * <p><b>HTTP Method:</b> DELETE</p>
+     * <p><b>Endpoint:</b> /api/redis/history/{conversationId}</p>
+     *
+     * @param conversationId the unique identifier of the conversation to delete
+     * @return a {@link Map} containing:
+     * <ul>
+     *     <li>{@code conversationId} - the ID of the deleted conversation</li>
+     *     <li>{@code deleted} - boolean indicating successful deletion</li>
+     * </ul>
+     */
+    @DeleteMapping("/history/{conversationId}")
+    public Map<String, Object> deleteHistory(@PathVariable String conversationId) {
+        chatMemoryRepository.deleteByConversationId(conversationId);
 
+        return Map.of(
+                "conversationId", conversationId,
+                "deleted", true
+        );
+    }
 
     public record ChatRequest(String message) {}
 }

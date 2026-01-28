@@ -9,6 +9,20 @@ spring:
             model: gemini-2.0-flash
 
 
+    # NEW in 2.0: Redis Chat Memory configuration
+    chat:
+      memory:
+        repository:
+          redis:
+            key-prefix: "spring-ai-chat:"
+            time-to-live: 1h
+
+  # Redis configuration for Chat Memory
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
   docker:
     compose:
       enabled: false

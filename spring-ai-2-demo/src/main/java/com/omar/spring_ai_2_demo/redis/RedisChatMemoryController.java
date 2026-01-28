@@ -64,5 +64,43 @@ public class RedisChatMemoryController {
                 .build();
     }
 
+    /**
+     * Handles a chat request with persistent memory using Redis.
+     *
+     * <p>Messages sent via this endpoint are stored in Redis, allowing conversations
+     * to persist across server restarts and multiple sessions. Each conversation
+     * is identified by a unique {@code conversationId}.</p>
+     *
+     * <p>Internally, the {@link ChatClient} is used with a {@link ChatMemory} advisor
+     * to store and retrieve messages for the given conversation.</p>
+     *
+     * <p><b>HTTP Method:</b> POST</p>
+     * <p><b>Endpoint:</b> /api/redis/chat/{conversationId}</p>
+     *
+     * @param conversationId a unique identifier for the conversation; used to group messages in Redis
+     * @param request the chat request containing the user's message
+     * @return a {@link Map} containing:
+     * <ul>
+     *     <li>{@code conversationId} - the ID of the conversation</li>
+     *     <li>{@code response} - the AI-generated reply for the given message</li>
+     * </ul>
+     */
+    @PostMapping("/chat/{conversationId}")
+    public Map<String, Object> chat(
+            @PathVariable String conversationId,
+            @RequestBody ChatRequest request
+    ) {
+        String response = chatClient.prompt()
+                .user(request.message())
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
+                .call()
+                .content();
 
+        return Map.of(
+                "conversationId", conversationId,
+                "response", response
+        );
+    }
+
+    public record ChatRequest(String message) {}
 }

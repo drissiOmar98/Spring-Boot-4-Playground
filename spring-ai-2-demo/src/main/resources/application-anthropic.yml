@@ -1,0 +1,15 @@
+spring:
+  # NEW in 2.0: Anthropic Citations & Skills API
+  ai:
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY}
+      timeout: 600s
+
+      chat:
+        options:
+          model: claude-sonnet-4-5
+
+
+logging:
+  level:
+    org.springframework.ai: INFO

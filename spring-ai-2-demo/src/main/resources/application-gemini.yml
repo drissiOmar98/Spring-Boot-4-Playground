@@ -1,0 +1,12 @@
+spring:
+  ai:
+    openai:
+      api-key: ${GOOGLE_GENAI_API_KEY}
+
+      chat:
+        options:
+          model: gemini-2.0-flash
+
+logging:
+  level:
+    org.springframework.ai: INFO

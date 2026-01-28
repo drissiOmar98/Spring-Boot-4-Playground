@@ -18,6 +18,7 @@
         <option value="$PROJECT_DIR$/spring-data-aot/pom.xml" />
         <option value="$PROJECT_DIR$/dynamic-bean-registration/pom.xml" />
         <option value="$PROJECT_DIR$/opentelemetry-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-ai-2-demo/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

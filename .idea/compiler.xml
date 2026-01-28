@@ -9,6 +9,7 @@
         <module name="rest-test-client" />
         <module name="api-versioning-path-segment" />
         <module name="rest-vs-mock-web-testing" />
+        <module name="spring-ai-2-demo" />
         <module name="dynamic-bean-registration" />
         <module name="api-versioning-query-param" />
         <module name="spring-data-aot" />
@@ -68,6 +69,7 @@
       <module name="rest-test-client" options="-parameters" />
       <module name="rest-vs-mock-web-testing" options="-parameters" />
       <module name="sb4-api-versioning-demo" options="-parameters" />
+      <module name="spring-ai-2-demo" options="-parameters" />
       <module name="spring-data-aot" options="-parameters" />
     </option>
   </component>

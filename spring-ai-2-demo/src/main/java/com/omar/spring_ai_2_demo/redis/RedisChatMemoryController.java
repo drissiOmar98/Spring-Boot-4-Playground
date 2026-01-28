@@ -102,5 +102,51 @@ public class RedisChatMemoryController {
         );
     }
 
+    /**
+     * Retrieves the conversation history for a specific conversation.
+     *
+     * <p>This endpoint fetches all messages stored in Redis for the given {@code conversationId}.
+     * It returns a structured history including message type and content, allowing clients
+     * to display the full conversation or continue it.</p>
+     *
+     * <p>Internally, the {@link ChatMemoryRepository} is queried to retrieve messages
+     * associated with the conversation.</p>
+     *
+     * <p><b>HTTP Method:</b> GET</p>
+     * <p><b>Endpoint:</b> /api/redis/history/{conversationId}</p>
+     *
+     * @param conversationId the unique identifier for the conversation whose history is being requested
+     * @return a {@link Map} containing:
+     * <ul>
+     *     <li>{@code conversationId} - the ID of the conversation</li>
+     *     <li>{@code messageCount} - the total number of messages in the conversation</li>
+     *     <li>{@code messages} - a list of message objects, each containing:
+     *         <ul>
+     *             <li>{@code type} - the message type (e.g., USER, AI)</li>
+     *             <li>{@code content} - the message text</li>
+     *         </ul>
+     *     </li>
+     * </ul>
+     */
+    @GetMapping("/history/{conversationId}")
+    public Map<String, Object> getHistory(@PathVariable String conversationId) {
+        var messages = chatMemoryRepository.findByConversationId(conversationId);
+
+        List<Map<String, String>> history = messages.stream()
+                .map(msg -> Map.of(
+                        "type", msg.getMessageType().name(),
+                        "content", msg.getText()
+                ))
+                .toList();
+
+        return Map.of(
+                "conversationId", conversationId,
+                "messageCount", history.size(),
+                "messages", history
+        );
+    }
+
+
+
     public record ChatRequest(String message) {}
 }

@@ -1,0 +1,49 @@
+### Spring AI 2.0 - IntelliJ HTTP Client Tests
+### Base URL: http://localhost:8080
+
+
+###############################################################################
+### 1. Redis Chat Memory
+### Note: Requires Redis running (docker compose up -d)
+###############################################################################
+
+### Start a conversation - introduce yourself
+POST http://localhost:8080/api/redis/chat/user123
+Content-Type: application/json
+
+{
+  "message": "My name is Omar"
+}
+
+### Continue the conversation - test memory
+POST http://localhost:8080/api/redis/chat/user123
+Content-Type: application/json
+
+{
+  "message": "What is my name?"
+}
+
+### Ask another question in same conversation
+POST http://localhost:8080/api/redis/chat/user123
+Content-Type: application/json
+
+{
+  "message": "Can you summarize our conversation so far?"
+}
+
+### Start a different user conversation
+POST http://localhost:8080/api/redis/chat/user456
+Content-Type: application/json
+
+{
+  "message": "Hello, I'm Bob and I'm interested in Spring Boot"
+}
+
+### Get Conversation History
+GET http://localhost:8080/api/redis/history/user123
+
+### List Active Conversations
+GET http://localhost:8080/api/redis/conversations
+
+### Clear Conversation History
+DELETE http://localhost:8080/api/redis/history/user123

@@ -29,6 +29,30 @@ Content-Type: text/plain
 
 Tell me a joke about Java programming
 
+###############################################################################
+### 2. Anthropic Claude - Citations API
+###############################################################################
+
+### Citations - Get sourced responses from documents
+POST http://localhost:8080/api/anthropic/citations
+Content-Type: application/json
+
+{
+  "document": "The Eiffel Tower was completed in 1889. It stands 330 meters tall.",
+  "title": "Eiffel Tower Facts",
+  "question": "When was it built and how tall is it?"
+}
+
+### Citations - Longer document example
+POST http://localhost:8080/api/anthropic/citations
+Content-Type: application/json
+
+{
+  "document": "Spring AI 2.0 introduces several new features. The OpenAI SDK integration provides the Responses API with web search. Anthropic Claude now supports citations and document generation skills. Google Gemini is available through the GenAI starter. Redis can be used for persistent chat memory.",
+  "title": "Spring AI 2.0 Features",
+  "question": "What are the new features in Spring AI 2.0?"
+}
+
 
 
 ###############################################################################

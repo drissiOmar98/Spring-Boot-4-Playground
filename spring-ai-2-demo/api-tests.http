@@ -53,6 +53,44 @@ Content-Type: application/json
   "question": "What are the new features in Spring AI 2.0?"
 }
 
+###############################################################################
+### 3. Anthropic Claude - Skills API (Document Generation)
+###############################################################################
+
+### Generate Excel spreadsheet
+POST http://localhost:8080/api/anthropic/skills/excel
+Content-Type: application/json
+
+{
+  "prompt": "Create a budget spreadsheet with income and expenses"
+}
+
+### Generate PowerPoint presentation
+POST http://localhost:8080/api/anthropic/skills/powerpoint
+Content-Type: application/json
+
+{
+  "prompt": "Create a 3-slide presentation about Spring AI"
+}
+
+### Generate Word document
+POST http://localhost:8080/api/anthropic/skills/word
+Content-Type: application/json
+
+{
+  "prompt": "Create a project proposal document for a web application"
+}
+
+### Generate PDF document
+POST http://localhost:8080/api/anthropic/skills/pdf
+Content-Type: application/json
+
+{
+  "prompt": "Create a report summarizing quarterly sales data. Generate some fake data for a company called Dan's Coffee House"
+}
+
+### Download generated file (replace {fileId} with actual ID from response)
+GET http://localhost:8080/api/anthropic/files/{{fileId}}
 
 
 ###############################################################################

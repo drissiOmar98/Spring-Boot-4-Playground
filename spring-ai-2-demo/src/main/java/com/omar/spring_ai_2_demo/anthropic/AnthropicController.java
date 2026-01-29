@@ -86,6 +86,66 @@ public class AnthropicController {
         );
     }
 
+    /**
+     * Generates downloadable documents using Anthropic Claude Skills API.
+     *
+     * <p>NEW IN Spring AI 2.0:</p>
+     * <ul>
+     *     <li>Skills API: Claude can generate documents in multiple formats.</li>
+     *     <li>Supported types: excel (XLSX), powerpoint (PPTX), word (DOCX), pdf (PDF).</li>
+     *     <li>Useful for automated document creation, reporting, or exporting AI responses.</li>
+     * </ul>
+     *
+     * <p><b>HTTP Method:</b> POST</p>
+     * <p><b>Endpoint:</b> /api/anthropic/skills/{type}</p>
+     *
+     * @param type the type of document to generate: "excel", "powerpoint", "word", or "pdf"
+     * @param request the {@link SkillRequest} containing:
+     * <ul>
+     *     <li>{@code prompt} - the instruction or content for Claude to generate the document</li>
+     * </ul>
+     * @return a {@link SkillResponse} containing:
+     * <ul>
+     *     <li>{@code answer} - AI-generated text from the document</li>
+     *     <li>{@code fileIds} - identifiers of the generated files</li>
+     *     <li>{@code type} - the requested document type</li>
+     * </ul>
+     * @throws IllegalArgumentException if the {@code type} is not one of the supported formats
+     */
+    @PostMapping("/skills/{type}")
+    public SkillResponse generateDocument(
+            @PathVariable String type,
+            @RequestBody SkillRequest request
+    ) {
+        // Map the type string to the corresponding AnthropicSkill enum
+        AnthropicApi.AnthropicSkill skill = switch (type.toLowerCase()) {
+            case "excel" -> AnthropicApi.AnthropicSkill.XLSX;
+            case "powerpoint" -> AnthropicApi.AnthropicSkill.PPTX;
+            case "word" -> AnthropicApi.AnthropicSkill.DOCX;
+            case "pdf" -> AnthropicApi.AnthropicSkill.PDF;
+            default -> throw new IllegalArgumentException("Supported types: excel, powerpoint, word, pdf");
+        };
+
+        // Build the prompt and call Claude with the Skills API
+        ChatResponse response = chatModel.call(
+                new Prompt(
+                        request.prompt(),   // The user-provided instruction
+                        AnthropicChatOptions.builder()
+                                .model("claude-sonnet-4-5") // Use Claude model optimized for Skills API
+                                .maxTokens(16384) // Large token limit for document generation
+                                .anthropicSkill(skill)  // Specify the document type
+                                .build()
+                )
+        );
+
+        // Return the response including AI-generated text and generated file IDs
+        return new SkillResponse(
+                response.getResult().getOutput().getText(), // AI-generated content
+                extractFileIds(response),                   // IDs of generated files
+                type                                        // Document type
+        );
+    }
+
 
 
     @SuppressWarnings("unchecked")

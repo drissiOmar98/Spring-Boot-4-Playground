@@ -1,9 +1,38 @@
 ### Spring AI 2.0 - IntelliJ HTTP Client Tests
 ### Base URL: http://localhost:8080
 
+###############################################################################
+### 1. OpenAI SDK Integration - Responses API
+###############################################################################
+
+### Responses API with Web Search
+# This uses OpenAI's Responses API directly (not available via Spring AI ChatClient)
+# The model automatically searches the web and returns citations
+POST http://localhost:8080/api/openai/responses/search
+Content-Type: application/json
+
+{
+  "query": "What are the latest developments in Spring AI?"
+}
+
+### Responses API - Another example
+POST http://localhost:8080/api/openai/responses/search
+Content-Type: application/json
+
+{
+  "query": "What is the current price of Bitcoin?"
+}
+
+### Basic Chat (uses Spring AI ChatClient)
+POST http://localhost:8080/api/openai/chat
+Content-Type: text/plain
+
+Tell me a joke about Java programming
+
+
 
 ###############################################################################
-### 1. Redis Chat Memory
+### 5. Redis Chat Memory
 ### Note: Requires Redis running (docker compose up -d)
 ###############################################################################
 

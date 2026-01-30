@@ -30,6 +30,28 @@ public class GoogleGenAiController {
         this.chatClient = ChatClient.builder(chatModel).build();
     }
 
+    /**
+     * Performs a basic chat interaction with Google Gemini.
+     *
+     * <p>This endpoint sends the user's message to the Gemini model
+     * and returns the generated response.</p>
+     *
+     * <p>HTTP Method: POST</p>
+     * <p>Endpoint: /api/google/chat</p>
+     *
+     * @param request contains the user's message
+     * @return a map containing the AI-generated response
+     */
+    @PostMapping("/chat")
+    public Map<String, String> chat(@RequestBody ChatRequest request) {
+        String response = chatClient.prompt()
+                .user(request.message())
+                .call()
+                .content();
+        return Map.of("response", response);
+    }
+
+
 
      /* ============================================================
        Request / Response DTOs

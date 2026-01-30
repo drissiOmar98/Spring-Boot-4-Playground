@@ -92,6 +92,51 @@ Content-Type: application/json
 ### Download generated file (replace {fileId} with actual ID from response)
 GET http://localhost:8080/api/anthropic/files/{{fileId}}
 
+###############################################################################
+### 4. Google GenAI (Gemini)
+###############################################################################
+
+### Basic Chat
+POST http://localhost:8080/api/google/chat
+Content-Type: application/json
+
+{
+  "message": "Explain quantum computing in simple terms"
+}
+
+### Chat with Safety Ratings
+POST http://localhost:8080/api/google/chat/safe
+Content-Type: application/json
+
+{
+  "message": "Tell me about AI safety"
+}
+
+### Thinking Mode - Dynamic budget (default, -1)
+POST http://localhost:8080/api/google/chat/think
+Content-Type: application/json
+
+{
+  "message": "What is 25 * 47 + 83 - 19? Show your reasoning."
+}
+
+### Thinking Mode - High budget (more reasoning tokens)
+POST http://localhost:8080/api/google/chat/think
+Content-Type: application/json
+
+{
+  "message": "Explain the proof of Fermat's Last Theorem at a high level",
+  "thinkingBudget": 8000
+}
+
+### Thinking Mode - Disabled (no thinking, fastest)
+POST http://localhost:8080/api/google/chat/think
+Content-Type: application/json
+
+{
+  "message": "What is the capital of France?",
+  "thinkingBudget": 0
+}
 
 ###############################################################################
 ### 5. Redis Chat Memory

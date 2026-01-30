@@ -90,7 +90,59 @@ public class GoogleGenAiController {
     }
 
 
+    /**
+     * Performs a chat request using Gemini "thinking mode".
+     *
+     * <p>NEW IN Spring AI 2.0:</p>
+     * Gemini 2.5 Pro supports extended reasoning through a "thinking budget".</p>
+     *
+     * <p>Thinking Budget Options:</p>
+     * <ul>
+     *     <li>-1 → Dynamic (model decides)</li>
+     *     <li>0 → Disable thinking</li>
+     *     <li>>0 → Fixed token budget</li>
+     * </ul>
+     *
+     * <p>This mode is useful for complex reasoning, planning,
+     * and multi-step problem solving.</p>
+     *
+     * <p>HTTP Method: POST</p>
+     * <p>Endpoint: /api/google/chat/think</p>
+     *
+     * @param request contains the user message and optional thinking budget
+     * @return response text, extracted thoughts, and used budget
+     */
+    @PostMapping("/chat/think")
+    public ThinkingResponse chatWithThinking(@RequestBody ThinkingRequest request) {
+        // Default to dynamic thinking (-1), or use provided budget
+        int budget = request.thinkingBudget() != null ? request.thinkingBudget() : -1;
 
+        // Configure Gemini model with thinking mode enabled
+        var options = GoogleGenAiChatOptions.builder()
+                .model("gemini-2.5-pro")
+                .thinkingBudget(budget)
+                .includeThoughts(true)
+                .build();
+
+        // Execute prompt with advanced reasoning options
+        var response = chatClient.prompt()
+                .user(request.message())
+                .options(options)
+                .call()
+                .chatResponse();
+
+        // Extract main response content
+        String content = response.getResult().getOutput().getText();
+
+        // Extract thinking/reasoning from metadata if available
+        var thoughts = response.getMetadata().get("thoughts");
+
+        return new ThinkingResponse(
+                content,
+                thoughts != null ? thoughts.toString() : null,
+                budget
+        );
+    }
 
      /* ============================================================
        Request / Response DTOs

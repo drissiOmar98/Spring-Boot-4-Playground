@@ -52,6 +52,45 @@ public class GoogleGenAiController {
     }
 
 
+    /**
+     * Performs a chat request and returns safety ratings metadata.
+     *
+     * <p>NEW IN Spring AI 2.0:</p>
+     * Gemini responses can include safety classification information,
+     * such as toxicity, violence, or sensitive content indicators.
+     *
+     * <p>This endpoint demonstrates how to extract and expose this metadata.</p>
+     *
+     * <p>HTTP Method: POST</p>
+     * <p>Endpoint: /api/google/chat/safe</p>
+     *
+     * @param request contains the user's message
+     * @return the generated response and associated safety ratings
+     */
+    @PostMapping("/chat/safe")
+    public SafeResponse chatWithSafety(@RequestBody ChatRequest request) {
+        // Execute prompt and retrieve full chat response (with metadata)
+        var response = chatClient.prompt()
+                .user(request.message())
+                .call()
+                .chatResponse();
+
+        // Extract main response text
+        String content = response.getResult().getOutput().getText();
+
+        // Extract safety ratings from metadata if available
+        @SuppressWarnings("unchecked")
+        var safetyRatings = response.getMetadata().get("safetyRatings");
+
+        // Return response and safety information
+        return new SafeResponse(
+                content,
+                safetyRatings != null ? safetyRatings : List.of()
+        );
+    }
+
+
+
 
      /* ============================================================
        Request / Response DTOs

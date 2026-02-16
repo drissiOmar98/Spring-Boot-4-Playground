@@ -18,6 +18,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@EnableMultiFactorAuthentication(authorities = {
+        FactorGrantedAuthority.PASSWORD_AUTHORITY,
+        FactorGrantedAuthority.OTT_AUTHORITY
+})
 public class SecurityConfig {
 
     @Bean

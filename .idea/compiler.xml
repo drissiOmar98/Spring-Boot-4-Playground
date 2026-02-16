@@ -11,13 +11,14 @@
         <module name="rest-vs-mock-web-testing" />
         <module name="spring-ai-2-demo" />
         <module name="dynamic-bean-registration" />
+        <module name="spring-security-mfa" />
         <module name="api-versioning-query-param" />
-        <module name="spring-data-aot" />
-        <module name="opentelemetry-demo" />
-        <module name="api-versioning-media-type-param" />
         <module name="http-interfaces-demo" />
         <module name="api-versioning-header" />
         <module name="api-versioning-demo" />
+        <module name="spring-data-aot" />
+        <module name="opentelemetry-demo" />
+        <module name="api-versioning-media-type-param" />
       </profile>
       <profile name="Annotation profile for null-safety-jspecify-nullaway" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -71,6 +72,7 @@
       <module name="sb4-api-versioning-demo" options="-parameters" />
       <module name="spring-ai-2-demo" options="-parameters" />
       <module name="spring-data-aot" options="-parameters" />
+      <module name="spring-security-mfa" options="-parameters" />
     </option>
   </component>
 </project>

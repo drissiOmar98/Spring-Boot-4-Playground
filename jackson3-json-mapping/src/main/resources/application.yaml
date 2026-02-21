@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: jackson3-json-mapping

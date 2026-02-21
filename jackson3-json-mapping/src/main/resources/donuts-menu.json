@@ -1,0 +1,92 @@
+[
+  {
+    "type": "Classic Glazed",
+    "glaze": "VANILLA",
+    "toppings": [],
+    "price": 2.50,
+    "isVegan": false,
+    "calories": 260,
+    "bakedAt": "2025-11-06T05:30:00"
+  },
+  {
+    "type": "Chocolate Lovers",
+    "glaze": "CHOCOLATE",
+    "toppings": ["chocolate chips", "chocolate drizzle"],
+    "price": 3.25,
+    "isVegan": false,
+    "calories": 340,
+    "bakedAt": "2025-11-06T05:45:00"
+  },
+  {
+    "type": "Strawberry Delight",
+    "glaze": "STRAWBERRY",
+    "toppings": ["sprinkles", "fresh strawberries"],
+    "price": 3.50,
+    "isVegan": false,
+    "calories": 310,
+    "bakedAt": "2025-11-06T06:00:00"
+  },
+  {
+    "type": "Maple Bacon Bar",
+    "glaze": "MAPLE",
+    "toppings": ["bacon bits"],
+    "price": 3.75,
+    "isVegan": false,
+    "calories": 380,
+    "bakedAt": "2025-11-06T06:15:00"
+  },
+  {
+    "type": "Cinnamon Sugar Classic",
+    "glaze": "CINNAMON_SUGAR",
+    "toppings": [],
+    "price": 2.75,
+    "isVegan": true,
+    "calories": 240,
+    "bakedAt": "2025-11-06T06:30:00"
+  },
+  {
+    "type": "Powdered Paradise",
+    "glaze": "POWDERED_SUGAR",
+    "toppings": ["powdered sugar"],
+    "price": 2.50,
+    "isVegan": true,
+    "calories": 230,
+    "bakedAt": "2025-11-06T06:45:00"
+  },
+  {
+    "type": "Plain Jane",
+    "glaze": "NONE",
+    "toppings": [],
+    "price": 2.00,
+    "isVegan": true,
+    "calories": 200,
+    "bakedAt": "2025-11-06T07:00:00"
+  },
+  {
+    "type": "Boston Cream",
+    "glaze": "CHOCOLATE",
+    "toppings": ["bavarian cream filling"],
+    "price": 3.50,
+    "isVegan": false,
+    "calories": 350,
+    "bakedAt": "2025-11-06T07:15:00"
+  },
+  {
+    "type": "Rainbow Sprinkles",
+    "glaze": "VANILLA",
+    "toppings": ["rainbow sprinkles"],
+    "price": 3.00,
+    "isVegan": false,
+    "calories": 280,
+    "bakedAt": "2025-11-06T07:30:00"
+  },
+  {
+    "type": "Maple Pecan",
+    "glaze": "MAPLE",
+    "toppings": ["candied pecans"],
+    "price": 3.75,
+    "isVegan": false,
+    "calories": 360,
+    "bakedAt": "2025-11-06T07:45:00"
+  }
+]

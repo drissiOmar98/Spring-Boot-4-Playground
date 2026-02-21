@@ -2,7 +2,6 @@ package com.omar.jackson3_json_mapping.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.omar.jackson3_json_mapping.Views;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

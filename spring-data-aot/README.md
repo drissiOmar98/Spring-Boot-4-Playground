@@ -39,4 +39,35 @@ This project demonstrates both **Coffee and Order management** with relational d
 - 🔗 **Relationship queries with JOINs** fully validated
 - ⚠️ **SQL errors caught at compile-time** instead of production
 
+---
 
+## Why This Matters 🎯
+
+### From Runtime Reflection to Compile-Time Safety
+
+Traditional **Spring Data** resolves repository query methods **at runtime** using reflection.  
+When your application starts, Spring parses method names such as
+`findByNameContainingIgnoreCase`, derives the corresponding SQL, and dynamically generates
+repository implementations.
+
+While this approach is flexible, it comes with trade-offs:
+- Slower application startup
+- Higher memory usage due to reflection
+- Errors surface late, often only after deployment
+
+---
+
+## Spring Data AOT: A Compile-Time Upgrade
+
+**Spring Data AOT (Ahead-Of-Time processing)** moves repository analysis from runtime to
+**build time**, fundamentally changing how Spring Boot 4 applications behave.
+
+This shift enables earlier feedback, faster startup, and safer deployments.
+
+---
+
+## 1. Catch Errors Before They Reach Production
+
+### Without AOT
+```java
+List<Coffee> findByNamme(String name); // Typo! ❌

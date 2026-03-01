@@ -1,0 +1,42 @@
+[
+  {
+    "id": "rest-001",
+    "name": "The Burger House",
+    "cuisine": "American",
+    "rating": 4.5,
+    "address": "123 Main St, Downtown",
+    "menuItemIds": ["item-001", "item-002", "item-003", "item-004"]
+  },
+  {
+    "id": "rest-002",
+    "name": "Pasta Paradise",
+    "cuisine": "Italian",
+    "rating": 4.7,
+    "address": "456 Oak Ave, Little Italy",
+    "menuItemIds": ["item-005", "item-006", "item-007", "item-008"]
+  },
+  {
+    "id": "rest-003",
+    "name": "Sushi Station",
+    "cuisine": "Japanese",
+    "rating": 4.8,
+    "address": "789 Pine Rd, Japantown",
+    "menuItemIds": ["item-009", "item-010", "item-011", "item-012"]
+  },
+  {
+    "id": "rest-004",
+    "name": "Taco Fiesta",
+    "cuisine": "Mexican",
+    "rating": 4.3,
+    "address": "321 Elm St, Mission District",
+    "menuItemIds": ["item-013", "item-014", "item-015", "item-016"]
+  },
+  {
+    "id": "rest-005",
+    "name": "Dragon Wok",
+    "cuisine": "Chinese",
+    "rating": 4.6,
+    "address": "654 Maple Dr, Chinatown",
+    "menuItemIds": ["item-017", "item-018", "item-019", "item-020"]
+  }
+]

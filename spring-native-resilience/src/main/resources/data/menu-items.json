@@ -1,0 +1,182 @@
+[
+  {
+    "id": "item-001",
+    "restaurantId": "rest-001",
+    "name": "Classic Cheeseburger",
+    "description": "Juicy beef patty with cheddar, lettuce, tomato, and our special sauce",
+    "price": 12.99,
+    "category": "Burgers",
+    "available": true
+  },
+  {
+    "id": "item-002",
+    "restaurantId": "rest-001",
+    "name": "Bacon BBQ Burger",
+    "description": "Smoky BBQ sauce, crispy bacon, onion rings, and cheddar",
+    "price": 14.99,
+    "category": "Burgers",
+    "available": true
+  },
+  {
+    "id": "item-003",
+    "restaurantId": "rest-001",
+    "name": "Crispy Fries",
+    "description": "Golden crispy French fries with sea salt",
+    "price": 4.99,
+    "category": "Sides",
+    "available": true
+  },
+  {
+    "id": "item-004",
+    "restaurantId": "rest-001",
+    "name": "Chocolate Milkshake",
+    "description": "Rich and creamy chocolate milkshake",
+    "price": 5.99,
+    "category": "Drinks",
+    "available": true
+  },
+  {
+    "id": "item-005",
+    "restaurantId": "rest-002",
+    "name": "Spaghetti Carbonara",
+    "description": "Classic Roman pasta with eggs, pecorino, and guanciale",
+    "price": 16.99,
+    "category": "Pasta",
+    "available": true
+  },
+  {
+    "id": "item-006",
+    "restaurantId": "rest-002",
+    "name": "Margherita Pizza",
+    "description": "Fresh mozzarella, basil, and San Marzano tomatoes",
+    "price": 13.99,
+    "category": "Pizza",
+    "available": true
+  },
+  {
+    "id": "item-007",
+    "restaurantId": "rest-002",
+    "name": "Tiramisu",
+    "description": "Classic Italian dessert with espresso-soaked ladyfingers",
+    "price": 7.99,
+    "category": "Desserts",
+    "available": true
+  },
+  {
+    "id": "item-008",
+    "restaurantId": "rest-002",
+    "name": "Caprese Salad",
+    "description": "Fresh mozzarella, tomatoes, and basil with balsamic glaze",
+    "price": 9.99,
+    "category": "Salads",
+    "available": true
+  },
+  {
+    "id": "item-009",
+    "restaurantId": "rest-003",
+    "name": "Salmon Nigiri Set",
+    "description": "6 pieces of fresh salmon nigiri",
+    "price": 15.99,
+    "category": "Nigiri",
+    "available": true
+  },
+  {
+    "id": "item-010",
+    "restaurantId": "rest-003",
+    "name": "California Roll",
+    "description": "Crab, avocado, and cucumber with sesame seeds",
+    "price": 11.99,
+    "category": "Rolls",
+    "available": true
+  },
+  {
+    "id": "item-011",
+    "restaurantId": "rest-003",
+    "name": "Spicy Tuna Roll",
+    "description": "Fresh tuna with spicy mayo and scallions",
+    "price": 13.99,
+    "category": "Rolls",
+    "available": true
+  },
+  {
+    "id": "item-012",
+    "restaurantId": "rest-003",
+    "name": "Miso Soup",
+    "description": "Traditional Japanese soup with tofu and seaweed",
+    "price": 3.99,
+    "category": "Soups",
+    "available": true
+  },
+  {
+    "id": "item-013",
+    "restaurantId": "rest-004",
+    "name": "Carne Asada Tacos",
+    "description": "3 grilled steak tacos with cilantro and onions",
+    "price": 12.99,
+    "category": "Tacos",
+    "available": true
+  },
+  {
+    "id": "item-014",
+    "restaurantId": "rest-004",
+    "name": "Chicken Burrito",
+    "description": "Grilled chicken, rice, beans, cheese, and salsa",
+    "price": 10.99,
+    "category": "Burritos",
+    "available": true
+  },
+  {
+    "id": "item-015",
+    "restaurantId": "rest-004",
+    "name": "Guacamole & Chips",
+    "description": "Fresh house-made guacamole with tortilla chips",
+    "price": 7.99,
+    "category": "Appetizers",
+    "available": true
+  },
+  {
+    "id": "item-016",
+    "restaurantId": "rest-004",
+    "name": "Horchata",
+    "description": "Traditional rice milk beverage with cinnamon",
+    "price": 3.99,
+    "category": "Drinks",
+    "available": true
+  },
+  {
+    "id": "item-017",
+    "restaurantId": "rest-005",
+    "name": "Kung Pao Chicken",
+    "description": "Spicy Sichuan chicken with peanuts and vegetables",
+    "price": 14.99,
+    "category": "Main Dishes",
+    "available": true
+  },
+  {
+    "id": "item-018",
+    "restaurantId": "rest-005",
+    "name": "Beef Fried Rice",
+    "description": "Wok-fried rice with tender beef and mixed vegetables",
+    "price": 12.99,
+    "category": "Rice Dishes",
+    "available": true
+  },
+  {
+    "id": "item-019",
+    "restaurantId": "rest-005",
+    "name": "Spring Rolls",
+    "description": "4 crispy vegetable spring rolls with sweet chili sauce",
+    "price": 6.99,
+    "category": "Appetizers",
+    "available": true
+  },
+  {
+    "id": "item-020",
+    "restaurantId": "rest-005",
+    "name": "Hot & Sour Soup",
+    "description": "Traditional spicy and tangy soup with tofu",
+    "price": 4.99,
+    "category": "Soups",
+    "available": true
+  }
+]

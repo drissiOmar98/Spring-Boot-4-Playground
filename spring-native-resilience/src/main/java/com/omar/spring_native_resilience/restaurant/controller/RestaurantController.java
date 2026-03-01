@@ -124,6 +124,26 @@ public class RestaurantController {
         }
     }
 
-
+    /**
+     * Shuts down an {@link ExecutorService} gracefully.
+     * Waits up to 2 minutes for tasks to complete, otherwise forces shutdown.
+     * Properly handles {@link InterruptedException} and interrupts the current thread.
+     *
+     * @param executor The {@link ExecutorService} to shut down
+     */
+    private void shutdownExecutor(ExecutorService executor) {
+        executor.shutdown();
+        try {
+            boolean finished = executor.awaitTermination(2, TimeUnit.MINUTES);
+            if (!finished) {
+                log.warn("⚠️  Some notifications did not complete within 2 minutes");
+                executor.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            log.error("❌ Thread pool interrupted: {}", e.getMessage());
+            executor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
+    }
 
 }

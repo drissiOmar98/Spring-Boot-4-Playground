@@ -1,0 +1,50 @@
+# QuickBites API Tests
+# Run these tests to see Spring Framework 7 resilience features in action
+
+### Get All Restaurants
+# Shows the test data loaded from JSON files
+GET http://localhost:8080/api/restaurants/
+
+###
+
+### @Retryable Demo - Get Restaurant Menu
+# Tests declarative retry with exponential backoff
+# Simulates 40% failure rate - watch logs for automatic retry attempts
+# Success rate improves from 60% to 95%+ with retries
+GET http://localhost:8080/api/restaurants/rest-001/menu
+Accept: application/json
+
+###
+
+### RetryTemplate Demo - Assign Driver
+# Tests programmatic retry with custom logic (10 attempts, exponential backoff)
+# Simulates 50% driver availability - check logs for retry behavior
+# Also demonstrates RetryListener tracking metrics
+POST http://localhost:8080/api/drivers/assign?orderId=order-001
+Accept: application/json
+
+###
+
+### @ConcurrencyLimit Demo - Lunch Rush (Platform Threads)
+# Submits 10 concurrent order notifications with @ConcurrencyLimit(3)
+# Uses fixed thread pool with 10 platform threads
+# Only 3 notifications process simultaneously, others queue gracefully
+# Expected duration: ~6-8 seconds (10 orders / 3 concurrent * 2s each)
+# Watch logs to see exactly 3 notifications processing at any given time
+# Thread names: pool-2-thread-1, pool-2-thread-2, etc.
+GET http://localhost:8080/api/restaurants/lunch-rush
+Accept: application/json
+
+###
+
+### @ConcurrencyLimit Demo - Lunch Rush (Virtual Threads - Java 21+)
+# Same test as above but using Java 21+ virtual threads
+# Virtual threads are lightweight and created on-demand (no fixed pool size)
+# @ConcurrencyLimit(3) still enforces only 3 concurrent notifications
+# Expected duration: ~6-8 seconds (same bottleneck as platform threads)
+# Compare thread names in logs: VirtualThread[#XX] vs pool-2-thread-X
+# Demonstrates @ConcurrencyLimit works identically with both thread types
+GET http://localhost:8080/api/restaurants/lunch-rush-virtual
+Accept: application/json
+
+###

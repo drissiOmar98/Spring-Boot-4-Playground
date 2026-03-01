@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.resilience.annotation.EnableResilientMethods;
 
 @SpringBootApplication
-@EnableResilientMethods
+@EnableResilientMethods // Activates @Retryable and @ConcurrencyLimit processing
 public class SpringNativeResilienceApplication {
 
 	public static void main(String[] args) {

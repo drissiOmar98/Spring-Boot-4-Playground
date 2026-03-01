@@ -82,4 +82,36 @@ public class RestaurantController {
     }
 
 
+
+    /* ----------------- Helper Methods ----------------- */
+
+    /**
+     * Creates a list of sample orders for testing or simulation purposes.
+     * Each order is pre-populated with customer, restaurant, items, payment, and status.
+     *
+     * @param idFormat The string format for generating order IDs (e.g., "lunch-%04d")
+     * @param count    The number of orders to create
+     * @return A list of sample {@link Order} objects
+     */
+    private List<Order> createSampleOrders(String idFormat, int count) {
+        List<Order> orders = new ArrayList<>();
+        for (int i = 1; i <= count; i++) {
+            orders.add(new Order(
+                    String.format(idFormat, i),
+                    "customer-" + i,
+                    "restaurant-001",
+                    List.of("burger", "fries", "drink"),
+                    new BigDecimal("15.99"),
+                    "payment-" + i,
+                    "confirmed-" + i,
+                    Order.OrderStatus.CONFIRMED
+            ));
+        }
+        return orders;
+    }
+
+
+
+
+
 }

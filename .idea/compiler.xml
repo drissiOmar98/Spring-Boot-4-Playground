@@ -13,6 +13,7 @@
         <module name="dynamic-bean-registration" />
         <module name="spring-security-mfa" />
         <module name="api-versioning-query-param" />
+        <module name="spring-native-resilience" />
         <module name="jackson3-json-mapping" />
         <module name="http-interfaces-demo" />
         <module name="api-versioning-header" />
@@ -74,6 +75,7 @@
       <module name="sb4-api-versioning-demo" options="-parameters" />
       <module name="spring-ai-2-demo" options="-parameters" />
       <module name="spring-data-aot" options="-parameters" />
+      <module name="spring-native-resilience" options="-parameters" />
       <module name="spring-security-mfa" options="-parameters" />
     </option>
   </component>

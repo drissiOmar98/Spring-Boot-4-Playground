@@ -1,4 +1,4 @@
-package com.omar.spring_native_resilience.restaurant;
+package com.omar.spring_native_resilience.restaurant.domain;
 
 import java.math.BigDecimal;
 /**

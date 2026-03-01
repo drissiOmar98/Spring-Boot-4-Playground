@@ -1,6 +1,6 @@
 package com.omar.spring_native_resilience.driver.service;
 
-import com.omar.spring_native_resilience.driver.DriverRetryListener;
+import com.omar.spring_native_resilience.driver.listener.DriverRetryListener;
 import com.omar.spring_native_resilience.driver.domain.Driver;
 import com.omar.spring_native_resilience.driver.exception.NoDriversAvailableException;
 import com.omar.spring_native_resilience.order.Order;

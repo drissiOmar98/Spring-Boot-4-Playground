@@ -53,5 +53,33 @@ public class RestaurantController {
         return restaurantService.findAll();
     }
 
+    /**
+     * Get the menu for a specific restaurant.
+     * Uses {@link RestaurantService#getMenuFromPartner} which may retry automatically on failure.
+     */
+    @GetMapping("/{restaurantId}/menu")
+    public ResponseEntity<Map<String, Object>> getRestaurantMenu(@PathVariable String restaurantId) {
+        log.info("🍽️  API request: Get menu for restaurant {}", restaurantId);
+
+        try {
+            List<MenuItem> menu = restaurantService.getMenuFromPartner(restaurantId);
+
+            return ResponseEntity.ok(Map.of(
+                    "restaurantId", restaurantId,
+                    "menuItems", menu,
+                    "count", menu.size(),
+                    "message", "Menu fetched successfully (possibly after retries)"
+            ));
+
+        } catch (Exception e) {
+            log.error("❌ Failed to fetch menu after all retries: {}", e.getMessage());
+            return ResponseEntity.status(503).body(Map.of(
+                    "error", "Service temporarily unavailable",
+                    "message", e.getMessage(),
+                    "restaurantId", restaurantId
+            ));
+        }
+    }
+
 
 }

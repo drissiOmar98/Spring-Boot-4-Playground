@@ -110,7 +110,19 @@ public class RestaurantController {
         return orders;
     }
 
-
+    /**
+     * Safely notifies a restaurant of a new order.
+     * Exceptions are caught and logged to prevent thread or executor interruption.
+     *
+     * @param order The {@link Order} to notify the restaurant about
+     */
+    private void safeNotify(Order order) {
+        try {
+            restaurantNotificationService.notifyRestaurant(order);
+        } catch (Exception e) {
+            log.error("❌ Error notifying restaurant for order {}: {}", order.id(), e.getMessage());
+        }
+    }
 
 
 

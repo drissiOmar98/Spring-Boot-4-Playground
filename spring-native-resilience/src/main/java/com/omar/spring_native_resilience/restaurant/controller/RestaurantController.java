@@ -124,7 +124,46 @@ public class RestaurantController {
         ));
     }
 
+    @GetMapping("/lunch-rush-virtual")
+    public ResponseEntity<Map<String, Object>> lunchRushVirtual() {
+        log.info("🍔 LUNCH RUSH STARTED (Virtual Threads) - Simulating 10 concurrent order notifications");
+        log.info("⚠️  Concurrency Limit: 3 (only 3 notifications can process simultaneously)");
 
+        LocalDateTime startTime = LocalDateTime.now();
+
+        // Create 10 orders to simulate lunch rush
+        List<Order> orders = createSampleOrders("lunch-%04d", 10);
+
+        // Use virtual threads (Java 21+) - lightweight, created on-demand
+        ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
+
+        log.info("📤 Submitting all 10 orders to virtual thread executor...");
+
+        // Submit all notification tasks concurrently
+        for (Order order : orders) {
+            executor.submit(() -> safeNotify(order));
+        }
+        // Shutdown executor and wait for all tasks to complete
+        shutdownExecutor(executor);
+
+        LocalDateTime endTime = LocalDateTime.now();
+        long durationSeconds = Duration.between(startTime, endTime).toSeconds();
+
+        log.info("🎉 LUNCH RUSH COMPLETED (Virtual Threads) - All 10 notifications processed in {} seconds", durationSeconds);
+        log.info("📊 Expected time: ~6-8 seconds (10 orders / 3 concurrent * 2s each)");
+
+        return ResponseEntity.ok(Map.of(
+            "message", "Lunch rush simulation completed (Virtual Threads)",
+            "totalOrders", 10,
+            "concurrencyLimit", 3,
+            "durationSeconds", durationSeconds,
+            "expectedDuration", "6-8 seconds",
+            "threadPoolType", "Virtual threads (Java 21+)",
+            "explanation", "With @ConcurrencyLimit(3), only 3 notifications process simultaneously. " +
+                          "Virtual threads are lightweight and created on-demand, but the concurrency limit still applies. " +
+                          "Check logs to see VirtualThread names vs platform thread pool names."
+        ));
+    }
 
     /* ----------------- Helper Methods ----------------- */
 

@@ -22,6 +22,7 @@
         <option value="$PROJECT_DIR$/spring-security-mfa/pom.xml" />
         <option value="$PROJECT_DIR$/jackson3-json-mapping/pom.xml" />
         <option value="$PROJECT_DIR$/spring-native-resilience/pom.xml" />
+        <option value="$PROJECT_DIR$/rest-client-error-handling/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

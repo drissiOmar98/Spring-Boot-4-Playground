@@ -70,5 +70,35 @@ public class OrderMessagingService {
                 .send(order);
     }
 
+    /**
+     * DEMO 3: Send with Custom Headers
+     *
+     * Demonstrates how to attach metadata to messages using Spring's MessageBuilder.
+     *
+     * Key Takeaways:
+     * - Use MessageBuilder to create a Message wrapper with custom headers
+     * - Headers enable routing decisions, filtering, and tracking without parsing the payload
+     * - JmsClient accepts both plain objects (auto-wrapped) and Message objects
+     * - Headers are accessible to consumers without deserializing the message body
+     *
+     * Use Case: Adding tracking information (source system, region, processing hints) that
+     * consumers can use for routing, logging, or conditional processing
+     */
+    public void sendOrderWithMetadata(Order order, Map<String, Object> metadata) {
+        log.info("Sending order with metadata headers: {}", order.orderId());
+
+        Message<Order> message = MessageBuilder
+                .withPayload(order)
+                .setHeader("source", "web-portal")
+                .setHeader("region", metadata.get("region"))
+                .setHeader("processedBy", "jms-client-demo")
+                .build();
+
+        jmsClient
+                .destination(ORDER_QUEUE)
+                .withTimeToLive(60000)
+                .send(message);
+    }
+
 
 }

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="rest-test-client" />
+        <module name="messaging-jms" />
         <module name="api-versioning-path-segment" />
         <module name="rest-vs-mock-web-testing" />
         <module name="spring-ai-2-demo" />
@@ -69,6 +70,7 @@
       <module name="dynamic-bean-registration" options="-parameters" />
       <module name="http-interfaces-demo" options="-parameters" />
       <module name="jackson3-json-mapping" options="-parameters" />
+      <module name="messaging-jms" options="-parameters" />
       <module name="null-safety-jspecify-nullaway" options="-parameters -XDcompilePolicy=simple --should-stop=ifError=FLOW &quot;-Xplugin:ErrorProne -Xep:NullAway:ERROR -XepOpt:NullAway:OnlyNullMarked&quot; -J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED -J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED -J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED" />
       <module name="opentelemetry-demo" options="-parameters" />
       <module name="rest-client-error-handling" options="-parameters" />

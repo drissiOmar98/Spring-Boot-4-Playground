@@ -1,0 +1,81 @@
+### DEMO 1: Basic Send with Fluent API
+### Simple order send without any special configuration
+POST http://localhost:8080/api/orders/simple
+Content-Type: application/json
+
+{
+  "orderId": "ORD-001",
+  "customerId": "CUST-123",
+  "amount": 299.99,
+  "status": "PENDING",
+  "timestamp": "2024-11-15T10:30:00"
+}
+
+###
+
+### DEMO 2: Send with Quality of Service (QoS) Settings
+### Priority order with TTL (5 min), priority level 9, and 1 second delivery delay
+POST http://localhost:8080/api/orders/priority
+Content-Type: application/json
+
+{
+  "orderId": "ORD-002",
+  "customerId": "CUST-456",
+  "amount": 1599.99,
+  "status": "PROCESSING",
+  "timestamp": "2024-11-15T14:45:00"
+}
+
+###
+
+### DEMO 3: Send with Custom Headers/Metadata
+### Order with additional metadata headers (region parameter adds tracking info)
+POST http://localhost:8080/api/orders/with-metadata?region=US-WEST
+Content-Type: application/json
+
+{
+  "orderId": "ORD-003",
+  "customerId": "CUST-789",
+  "amount": 749.50,
+  "status": "PENDING",
+  "timestamp": "2024-11-15T16:20:00"
+}
+
+###
+
+### DEMO 4: Synchronous Receive with Timeout
+### Receive a message from the queue (blocks up to 5 seconds waiting for a message)
+### Returns 200 with order if message available, or 204 No Content if queue is empty
+GET http://localhost:8080/api/orders/receive
+
+###
+
+### DEMO 5: Receive and Convert (Type-Safe Retrieval)
+### Same as Demo 4 but demonstrates the cleaner receive(Order.class) approach
+### This is handled by the same endpoint - the service method shows the simplified pattern
+GET http://localhost:8080/api/orders/receive
+
+###
+
+### DEMO 6: Request-Reply Pattern (Synchronous RPC)
+### Send order for processing and wait for processed response
+### Demonstrates synchronous request-response messaging pattern
+POST http://localhost:8080/api/orders/process
+Content-Type: application/json
+
+{
+  "orderId": "ORD-006",
+  "customerId": "CUST-999",
+  "amount": 2499.99,
+  "status": "PENDING",
+  "timestamp": "2024-11-15T18:00:00"
+}
+
+###
+
+### DEMO 7: Reusable Operation Handle (Bulk Operations)
+### Sends multiple express orders using a pre-configured reusable handle
+### Demonstrates performance optimization for repetitive messaging
+POST http://localhost:8080/api/orders/bulk-express
+
+###

@@ -100,5 +100,35 @@ public class OrderMessagingService {
                 .send(message);
     }
 
+    /**
+     * DEMO 4: Synchronous Receive with Timeout
+     *
+     * Demonstrates blocking message retrieval with configurable timeout.
+     *
+     * Key Takeaways:
+     * - receive() blocks until a message arrives or timeout expires
+     * - withReceiveTimeout() prevents indefinite blocking (5000ms = 5 seconds)
+     * - Returns Optional<Message<?>> - empty if no message available within timeout
+     * - Provides access to both payload and headers via Message object
+     *
+     * Use Case: Polling for messages in batch processing scenarios where you want to
+     * wait for a message but not block forever. The Optional pattern handles the
+     * "no message available" case gracefully.
+     */
+    public Optional<Order> receiveOrder() {
+        log.info("Receiving order with timeout...");
+
+        Optional<Message<?>> message = jmsClient
+                .destination(ORDER_QUEUE)
+                .withReceiveTimeout(5000)  // 5 second timeout
+                .receive();
+
+        return message.map(msg -> {
+            Order order = (Order) msg.getPayload();
+            log.info("Received order: {}", order.orderId());
+            return order;
+        });
+    }
+
 
 }

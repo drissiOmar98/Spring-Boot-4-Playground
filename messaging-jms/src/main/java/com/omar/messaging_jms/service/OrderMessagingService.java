@@ -13,6 +13,35 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * OrderMessagingService demonstrates advanced usage of Spring Boot 4 JmsClient.
+ *
+ * <p>This service showcases multiple messaging patterns using the new fluent JMS API,
+ * replacing traditional JmsTemplate with a modern, readable, and type-safe approach.</p>
+ *
+ * <h2>Features Demonstrated:</h2>
+ * <ul>
+ *     <li>Basic message sending with fluent API</li>
+ *     <li>Quality of Service (QoS) configuration (TTL, priority, delivery delay)</li>
+ *     <li>Custom message headers for metadata and routing</li>
+ *     <li>Synchronous message receiving with timeout</li>
+ *     <li>Type-safe message consumption with automatic conversion</li>
+ *     <li>Request-Reply (RPC-style) messaging over JMS</li>
+ *     <li>Reusable operation handles for performance optimization</li>
+ * </ul>
+ *
+ * <h2>Key Concepts:</h2>
+ * <ul>
+ *     <li>Fluent API design introduced in Spring Boot 4 JmsClient</li>
+ *     <li>Message conversion using custom Jackson-based MessageConverter</li>
+ *     <li>JMS QoS controls for enterprise-grade message delivery</li>
+ *     <li>Header-based metadata propagation</li>
+ *     <li>Blocking vs non-blocking message consumption patterns</li>
+ * </ul>
+ *
+ * <p>This class is intended for learning and demonstration purposes in a Spring Boot 4
+ * JMS messaging context using Apache ActiveMQ Artemis.</p>
+ */
 @Service
 public class OrderMessagingService {
 

@@ -187,5 +187,38 @@ public class OrderMessagingService {
                 .orElseThrow(() -> new RuntimeException("No reply received"));
     }
 
+    /**
+     * DEMO 7: Reusable Operation Handle (Performance Optimization)
+     * <p>
+     * Demonstrates creating a pre-configured operation handle for repeated use.
+     * <p>
+     * Key Takeaways:
+     * - JmsClient builder methods return an OperationHandle that can be reused
+     * - Configure destination and QoS settings once, then call send() multiple times
+     * - Eliminates duplicate configuration code when sending similar messages
+     * - Improves performance by avoiding repeated builder chain setup
+     * - Handle can be stored as instance variable for use across method calls
+     * <p>
+     * Use Case: Bulk operations or scenarios where you send multiple messages to the
+     * same destination with identical QoS settings. Example: processing a batch of
+     * express orders, sending notifications, or any repetitive messaging task.
+     */
+    public void demonstrateReusableHandle() {
+        // Create a reusable handle with preset QoS
+        var expressHandle = jmsClient
+                .destination("express-orders")
+                .withTimeToLive(60000)
+                .withPriority(8);
 
+        // Use the handle multiple times
+        Order order1 = new Order("EXP-001", "CUST-1", new BigDecimal("99.99"),
+                Order.OrderStatus.PENDING, LocalDateTime.now());
+        Order order2 = new Order("EXP-002", "CUST-2", new BigDecimal("149.99"),
+                Order.OrderStatus.PENDING, LocalDateTime.now());
+
+        expressHandle.send(order1);
+        expressHandle.send(order2);
+
+        log.info("Sent multiple express orders using reusable handle");
+    }
 }

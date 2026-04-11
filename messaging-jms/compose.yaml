@@ -1,5 +1,18 @@
 services:
-  artemis:
-    image: 'apache/activemq-artemis:latest'
+  activemq:
+    image: apache/activemq-artemis:latest-alpine
+    container_name: jms-demo
     ports:
-      - '61616'
+      - "8161:8161"    # Web Console (http://localhost:8161)
+      - "61616:61616"  # JMS
+    environment:
+      ARTEMIS_USER: admin
+      ARTEMIS_PASSWORD: admin
+      ANONYMOUS_LOGIN: false
+#    volumes:
+#      - ./data/activemq:/var/lib/artemis-instance
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8161"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5

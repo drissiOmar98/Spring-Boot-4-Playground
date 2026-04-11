@@ -45,5 +45,30 @@ public class OrderMessagingService {
                 .send(order);
     }
 
+    /**
+     * DEMO 2: Send with Quality of Service (QoS) Settings
+     *
+     * Demonstrates how to configure message delivery characteristics using QoS parameters.
+     *
+     * Key Takeaways:
+     * - withTimeToLive(): Sets message expiration (300000ms = 5 minutes)
+     * - withPriority(): Controls message processing order (0-9, where 9 is highest)
+     * - withDeliveryDelay(): Delays message availability to consumers (1000ms = 1 second)
+     * - All QoS settings are optional and can be combined as needed
+     *
+     * Use Case: High-priority orders that need expedited processing, with automatic expiration
+     * to prevent stale order processing
+     */
+    public void sendPriorityOrder(Order order) {
+        log.info("Sending priority order with QoS settings: {}", order.orderId());
+
+        jmsClient
+                .destination(ORDER_QUEUE)
+                .withTimeToLive(300000)  // 5 minutes TTL
+                .withPriority(9)         // Highest priority
+                .withDeliveryDelay(1000) // 1-second delay
+                .send(order);
+    }
+
 
 }

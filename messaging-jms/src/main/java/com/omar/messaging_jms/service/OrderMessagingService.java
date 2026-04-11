@@ -153,5 +153,39 @@ public class OrderMessagingService {
                 .receive(Order.class);
     }
 
+    /**
+     * DEMO 6: Request-Reply Pattern (Synchronous RPC over JMS)
+     *
+     * Demonstrates synchronous request-response messaging using sendAndReceive().
+     *
+     * Key Takeaways:
+     * - sendAndReceive() implements Remote Procedure Call (RPC) pattern over JMS
+     * - Automatically creates temporary reply queue and manages correlation IDs
+     * - Blocks until reply arrives or timeout expires (10000ms = 10 seconds)
+     * - Returns Optional<Message<?>> containing the response from the processor
+     * <p>
+     * Use Case: Scenarios requiring immediate confirmation or processed result, such as
+     * order validation, payment processing, or any operation where you need to wait for
+     * and act on the response. Note: This blocks the calling thread - use async patterns
+     * for high-throughput scenarios.
+     */
+    public Order processOrderSynchronously(Order order) {
+        log.info("Processing order synchronously: {}", order.orderId());
+
+        Message<Order> request = MessageBuilder
+                .withPayload(order)
+                .setHeader("operation", "process")
+                .build();
+
+        Optional<Message<?>> reply = jmsClient
+                .destination("order-processor")
+                .withReceiveTimeout(10000)
+                .sendAndReceive(request);
+
+        return reply
+                .map(msg -> (Order) msg.getPayload())
+                .orElseThrow(() -> new RuntimeException("No reply received"));
+    }
+
 
 }

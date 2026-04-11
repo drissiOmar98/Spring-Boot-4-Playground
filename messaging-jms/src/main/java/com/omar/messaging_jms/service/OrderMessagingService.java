@@ -130,5 +130,28 @@ public class OrderMessagingService {
         });
     }
 
+    /**
+     * DEMO 5: Receive and Convert (Type-Safe Retrieval)
+     *
+     * Demonstrates the streamlined receive() method with automatic type conversion.
+     *
+     * Key Takeaways:
+     * - receive(Class<T>) automatically converts and casts to the specified type
+     * - Eliminates manual casting and reduces boilerplate code
+     * - Returns Optional<Order> directly - cleaner than Optional<Message<?>>
+     * - MessageConverter handles deserialization transparently
+     *
+     * Use Case: When you only need the payload (not headers) and want type-safe,
+     * concise code. Compare to Demo 4 - this is simpler when headers aren't needed.
+     */
+    public Optional<Order> receiveAndConvertOrder() {
+        log.info("Receiving and converting order...");
+
+        return jmsClient
+                .destination(ORDER_QUEUE)
+                .withReceiveTimeout(3000)
+                .receive(Order.class);
+    }
+
 
 }
